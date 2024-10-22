@@ -29,8 +29,8 @@ public class PubSubSender {
         String message;
 
         while(!(message = scanner.nextLine()).equalsIgnoreCase("exit")) {
-            User user = new User(username, message);
-            rabbitTemplate.convertAndSend(fanout.getName(), "", user);
+//            User user = new User(username, message);
+            rabbitTemplate.convertAndSend(fanout.getName(), "", message);
         }
         System.out.println("Exited");
         scanner.close();
