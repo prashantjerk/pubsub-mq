@@ -45,7 +45,7 @@ public class PubSubConfig {
                                    AmqpAdmin amqpAdmin,
                                    FanoutExchange fanoutExchange) {
         return new PubSubReceiver(randomInt, queue, amqpAdmin, fanoutExchange);
-    }
+    }zzz
 
     @Bean
     public PubSubSender sender(@Value("#{@randomInt}") int randomInt) {

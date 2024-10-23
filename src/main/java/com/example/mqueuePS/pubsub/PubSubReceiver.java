@@ -1,6 +1,5 @@
 package com.example.mqueuePS.pubsub;
 
-//import com.example.mqueuePS.pubsub.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
