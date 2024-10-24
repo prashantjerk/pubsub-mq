@@ -13,24 +13,24 @@ import java.util.Scanner;
 public class PubSubSender {
     private  String username;
 
-    public PubSubSender(int randomInt) {
-        this.username = "user" + randomInt;
-    }
-
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
     @Autowired
-    private FanoutExchange fanout;
+    private FanoutExchange fanoutExchange;
+
+    @Autowired
+    private int randomInt;
+
+//    private final int constRandomInt = randomInt;
 
     public void send() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(username + ": ");
+        System.out.println("user" + randomInt);
         String message;
 
         while(!(message = scanner.nextLine()).equalsIgnoreCase("exit")) {
-//            User user = new User(username, message);
-            rabbitTemplate.convertAndSend(fanout.getName(), "", message);
+            rabbitTemplate.convertAndSend(fanoutExchange.getName(), "", message);
         }
         System.out.println("Exited");
         scanner.close();
