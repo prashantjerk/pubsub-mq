@@ -11,7 +11,6 @@ import java.util.Scanner;
 @Profile("sender")
 @Service
 public class PubSubSender {
-    private  String username;
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -19,20 +18,26 @@ public class PubSubSender {
     @Autowired
     private FanoutExchange fanoutExchange;
 
-    @Autowired
-    private int randomInt;
-
-//    private final int constRandomInt = randomInt;
-
     public void send() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("user" + randomInt);
         String message;
 
-        while(!(message = scanner.nextLine()).equalsIgnoreCase("exit")) {
+        while (true) {
+            System.out.println("Enter your message (type 'exit' to quit):");
+
+            message = scanner.nextLine();
+
+            if (message.equalsIgnoreCase("exit")) {
+                System.out.println("Exited");
+                break;
+            }
+
+            // Send the message to the fanout exchange
             rabbitTemplate.convertAndSend(fanoutExchange.getName(), "", message);
+            System.out.println("Sent message to all queues: " + message);
         }
-        System.out.println("Exited");
+
         scanner.close();
     }
+
 }
